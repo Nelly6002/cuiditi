@@ -109,9 +109,16 @@ function Compare() {
             {['Deals take 90 to 180 days.', 'Buyers need the full plot price up front.', 'Sellers wait in private chats with no open bid.'].map((t, i) => (
               <li key={t}>
                 <X weight="bold" className="x" />
-                <span className="strike">
-                  {t}
-                  <motion.span className="strike-line" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true, margin: '0px 0px -15% 0px' }} transition={{ duration: 0.7, ease: EASE, delay: 0.6 + i * 0.25 }} />
+                <span>
+                  <motion.span
+                    className="strike"
+                    initial={{ backgroundSize: '0% 1.5px' }}
+                    whileInView={{ backgroundSize: '100% 1.5px' }}
+                    viewport={{ once: true, margin: '0px 0px -15% 0px' }}
+                    transition={{ duration: 0.7, ease: EASE, delay: 0.6 + i * 0.25 }}
+                  >
+                    {t}
+                  </motion.span>
                 </span>
               </li>
             ))}

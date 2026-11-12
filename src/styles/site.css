@@ -300,7 +300,8 @@ h3 { font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1.25; }
 @media (max-width: 760px) {
   .xrow-link { grid-template-columns: minmax(0, 1fr) 44px; gap: 10px 16px; }
   .xrow-text { grid-column: 1 / -1; grid-row: 2; }
-  .xrow-img { grid-column: 1 / -1; grid-row: 3; height: 150px; clip-path: inset(0 0 0 0 round 18px); }
+  .xrow-img { grid-column: 1 / -1; grid-row: 3; height: 160px; border-radius: 18px; clip-path: inset(0 0 0 0 round 18px); }
+  .xrow-img img { transform: scale(1.06); }
 }
 
 /* Sticky stack */

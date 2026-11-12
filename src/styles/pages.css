@@ -162,8 +162,8 @@
 @keyframes shimmer { to { background-position: -200% 0; } }
 .tool-map { position: relative; min-height: 560px; border-radius: var(--r-card); overflow: hidden; background: var(--surface-2); border: 1px solid var(--line); }
 .tool-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: saturate(0.6); }
-.tool-legend { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 8px; flex-wrap: wrap; padding: 10px; border-radius: var(--r-control); background: var(--surface); border: 1px solid var(--line); }
-.tool-scan { position: absolute; top: 16px; right: 16px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--brand); color: var(--brand-ink); box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand) 50%, transparent); animation: ping 2.4s var(--ease) infinite; }
+.tool-legend { position: absolute; left: 12px; bottom: 34px; pointer-events: none; display: flex; gap: 8px; flex-wrap: wrap; padding: 10px; border-radius: var(--r-control); background: var(--surface); border: 1px solid var(--line); }
+.tool-scan { position: absolute; bottom: 38px; right: 12px; pointer-events: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--brand); color: var(--brand-ink); box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand) 50%, transparent); animation: ping 2.4s var(--ease) infinite; }
 @keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand) 50%, transparent); } 100% { box-shadow: 0 0 0 22px transparent; } }
 @media (max-width: 1000px) { .tool { grid-template-columns: minmax(0, 1fr); } .tool-map { min-height: 380px; } }
 
@@ -216,6 +216,9 @@
   .timeline { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .timeline-line { top: 32px; bottom: 32px; left: 31px; right: auto; width: 2px; height: auto; }
   .timeline-line span { width: 100%; height: 100%; transform-origin: 50% 0; }
+  .tl-step { position: relative; padding-left: 88px; min-height: 64px; }
+  .tl-node { position: absolute; left: 0; top: 0; }
+  .tl-step h3 { margin-top: 14px; }
 }
 
 /* Shares: photo splitter */
@@ -235,8 +238,8 @@
 .compare-card ul { display: grid; gap: 14px; }
 .compare-card li { display: flex; gap: 12px; align-items: center; color: var(--muted); }
 .compare-card .x { color: var(--bad-ink); flex: none; }
-.strike { position: relative; }
-.strike-line { position: absolute; left: 0; right: 0; top: 52%; height: 1.5px; background: var(--bad-ink); transform-origin: 0 50%; }
+/* Strike line drawn per line of text, so it still sits on the words when they wrap */
+.strike { background: linear-gradient(var(--bad-ink), var(--bad-ink)) 0 58% / 0% 1.5px no-repeat; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .compare-good { background: var(--brand-soft); border-color: transparent; }
 .compare-good li { color: var(--brand-soft-ink); }
 .tick { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--brand); color: var(--brand-ink); font-size: 13px; flex: none; }
@@ -331,4 +334,29 @@
 /* Reduced motion: stop loops */
 @media (prefers-reduced-motion: reduce) {
   .spin, .skel, .tool-scan, .chart-pulse { animation: none; }
+}
+
+/* ==========================================================================
+   Phone fixes (checked at 375px)
+   ========================================================================== */
+@media (max-width: 900px) {
+  /* Compact bento: icon beside the text instead of a tall empty card */
+  .bento-link { min-height: 0; padding: 24px; }
+  .b-2 .bento-link, .b-4 .bento-link, .b-wide .bento-link { flex-direction: row; align-items: flex-start; gap: 16px; }
+  .b-2 .bento-txt, .b-4 .bento-txt { margin-top: 0; }
+  .b-photo .bento-link { min-height: 300px; }
+  .bento-go, .b-wide .bento-go { display: none; }
+  /* Audience cards: most of a screen wide, not a whole screen tall */
+  .aud-card { width: 78vw; min-height: 320px; padding: 24px; }
+  .aud-ic { width: 52px; height: 52px; font-size: 28px; }
+}
+@media (max-width: 520px) {
+  /* Hero buttons: same width, stacked */
+  .phero-actions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .phero-actions .magnetic, .phero-actions .btn { width: 100%; }
+  .phero-actions .btn { justify-content: center; }
+  /* Darker lower half so the hero copy reads over busy photos */
+  .phero-shade { background: linear-gradient(180deg, rgba(5, 14, 9, 0.55) 0%, rgba(5, 14, 9, 0.1) 28%, rgba(5, 14, 9, 0.55) 50%, rgba(5, 14, 9, 0.92) 100%); }
+  .phero-lead { color: rgba(255, 255, 255, 0.92); }
+  .ctaband-card { max-width: none; width: 100%; }
 }
